@@ -1,0 +1,148 @@
+/* ===== WRAPPER ===== */
+.profile-wrapper {
+    min-height: calc(100vh - 10vh);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px 15px;
+    background: #0b0f1a;
+}
+
+/* ===== CARD ===== */
+.profile-card {
+    width: 100%;
+    max-width: 900px;
+    background: linear-gradient(145deg, #111827, #1c2030);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+}
+
+/* ===== HEADER ===== */
+.profile-header {
+     background: linear-gradient(135deg, #141e30, #243b55);
+    text-align: center;
+    padding: 50px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.profile-img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #00f2ff;
+    margin-bottom: 15px;
+    transition: 0.3s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #00f2ff66;
+}
+
+.profile-name {
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.profile-welcome {
+    font-size: 14px;
+    color: #9ca3af;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ===== FORM ===== */
+.profile-form {
+    padding: 40px 30px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-size: 13px;
+    color: #9ca3af;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select {
+    padding: 12px 15px;
+    border-radius: 12px;
+    border: 1px solid #2b2f3a;
+    background: #1f2937;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #00f2ff;
+    box-shadow: 0 0 10px #00f2ff50;
+}
+
+/* HIDE CHECKBOX DEFAULT STYLING */
+input[type="file"],
+input[type="checkbox"] {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #fff;
+}
+
+/* ===== SAVE BUTTON ===== */
+.btn-save {
+    background: #00f2ff;
+    color: #000;
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 30px;
+    border: none;
+    margin-top: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-save:hover {
+    background: #4facfe;
+    box-shadow: 0 0 20px #00f2ff77;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 576px) {
+    .profile-header {
+        padding: 30px 15px;
+    }
+    .profile-img {
+        width: 100px;
+        height: 100px;
+    }
+    .profile-name {
+        font-size: 20px;
+    }
+    .profile-form {
+        padding: 20px 15px;
+    }
+    .form-grid {
+        gap: 15px;
+    }
+}

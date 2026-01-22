@@ -1,0 +1,156 @@
+{% extends 'navbase.html' %}
+{% load static %}
+
+{% block content %}
+<div class="cart-wrapper">
+
+    <!-- CART HEADER -->
+    <div class="cart-header">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <h2>Shopping Cart</h2>
+    </div>
+
+    <!-- CSRF FORM -->
+    <form id="csrf-form">{% csrf_token %}</form>
+
+    <div style="display:grid; grid-template-columns: 2.3fr 1fr; gap:30px; align-items:flex-start;">
+
+        <!-- LEFT : CART ITEMS -->
+        <div class="cart-card">
+            {% for item in cart_items %}
+            <div class="cart-item" data-id="{{ item.product.id }}">
+
+                <img src="{{ item.product.image.url }}" class="cart-img">
+
+                <div class="cart-info">
+                    <h4>{{ item.product.title }}</h4>
+                    <small>Category: {{ item.product.category }}</small>
+                    <p>{{ item.product.short_description|truncatechars:65 }}</p>
+                    <p class="price">₹{{ item.product.discount_price }}</p>
+                </div>
+
+                <div class="cart-qty">
+                    <button type="button" class="dec-qty" data-id="{{ item.product.id }}">−</button>
+                    <span id="qty-{{ item.product.id }}">{{ item.quantity }}</span>
+                    <button type="button" class="inc-qty" data-id="{{ item.product.id }}">+</button>
+                </div>
+
+                <div class="cart-subtotal" id="subtotal-{{ item.product.id }}">
+                    ₹{{ item.subtotal }}
+                </div>
+
+                <button type="button" class="remove-btn" data-id="{{ item.product.id }}">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- RIGHT : ORDER SUMMARY -->
+        <div class="order-summary">
+            <h3>Order Summary</h3>
+
+            <div class="row">
+                <span>Amount</span>
+                <strong class="cart-amount">₹ {{ total_price }}</strong>
+            </div>
+
+            <div class="row">
+                <span>Shipping</span>
+                <span class="free">₹ 00.00</span>
+            </div>
+
+            <hr>
+
+            <div class="row total">
+                <span>Total <small>(incl. GST)</small></span>
+                <strong class="cart-total">₹ {{ total_price }}</strong>
+            </div>
+
+            <a href="{% url 'confirm_order' %}" style="text-decoration:none;">
+                <button type="submit" class="checkout-btn">
+                    🔒 Place Secure Order
+                </button>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<!-- JS (Same as before) -->
+<script>
+const csrftoken = document.querySelector("#csrf-form input[name='csrfmiddlewaretoken']").value;
+
+// Increase qty
+document.querySelectorAll(".inc-qty").forEach(btn => {
+    btn.addEventListener("click", function () {
+        const productId = this.dataset.id;
+        fetch("/cart/increase/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrftoken
+            },
+            body: JSON.stringify({ product_id: productId })
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById(`qty-${productId}`).innerText = data.quantity;
+            document.getElementById(`subtotal-${productId}`).innerText = "₹" + data.item_subtotal;
+            document.querySelector(".cart-amount").innerText = "₹ " + data.total_price;
+            document.querySelector(".cart-total").innerText = "₹ " + data.total_price;
+        });
+    });
+});
+
+// Decrease qty
+document.querySelectorAll(".dec-qty").forEach(btn => {
+    btn.addEventListener("click", function () {
+        const productId = this.dataset.id;
+        fetch("/cart/decrease/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrftoken
+            },
+            body: JSON.stringify({ product_id: productId })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.quantity === 0) {
+                document.querySelector(`.cart-item[data-id="${productId}"]`).remove();
+            } else {
+                document.getElementById(`qty-${productId}`).innerText = data.quantity;
+                document.getElementById(`subtotal-${productId}`).innerText = "₹" + data.item_subtotal;
+            }
+            document.querySelector(".cart-amount").innerText = "₹ " + data.total_price;
+            document.querySelector(".cart-total").innerText = "₹ " + data.total_price;
+        });
+    });
+});
+
+// Remove item
+document.querySelectorAll(".remove-btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+        const productId = this.dataset.id;
+        fetch(`/cart/remove/${productId}/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrftoken
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.removed) {
+                const itemRow = document.querySelector(`.cart-item[data-id="${productId}"]`);
+                if(itemRow) itemRow.remove();
+                document.querySelector(".cart-amount").innerText = "₹ " + data.total_price;
+                document.querySelector(".cart-total").innerText = "₹ " + data.total_price;
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

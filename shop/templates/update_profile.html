@@ -1,0 +1,99 @@
+{% extends 'navbase.html' %}
+{% load static %}
+
+{% block content %}
+<div class="profile-wrapper">
+  <div class="profile-card">
+
+    <!-- ===== PROFILE HEADER ===== -->
+    <div class="profile-header">
+      {% if profile.user_image %}
+        <img src="{{ profile.user_image.url }}" class="profile-img" id="profilePreview">
+      {% else %}
+        <img src="https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Picture.png" class="profile-img" id="profilePreview">
+      {% endif %}
+      <h2 class="profile-name">{{ request.user.username }}</h2>
+      <p class="profile-welcome">Update your personal information below</p>
+    </div>
+
+    <!-- ===== PROFILE FORM ===== -->
+    <div class="profile-form">
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Username</label>
+            {{ user_form.username }}
+          </div>
+
+          <div class="form-group">
+            <label>Email</label>
+            {{ user_form.email }}
+          </div>
+
+          <div class="form-group full-width">
+            <label>Profile Image</label>
+            {{ profile_form.user_image }}
+          </div>
+
+          <div class="form-group">
+            <label>Phone Number</label>
+            {{ profile_form.phone_number }}
+          </div>
+
+          <div class="form-group">
+            <label>Gender</label>
+            {{ profile_form.gender }}
+          </div>
+
+          <div class="form-group">
+            <label>Age</label>
+            {{ profile_form.age }}
+          </div>
+
+          <div class="form-group full-width">
+            <label>Address</label>
+            {{ profile_form.address_line }}
+          </div>
+
+          <div class="form-group">
+            <label>Pin Code</label>
+            {{ profile_form.pin_code }}
+          </div>
+
+          <div class="form-group">
+            <label>State</label>
+            {{ profile_form.state }}
+          </div>
+
+          <div class="form-group full-width">
+            <label>Country</label>
+            {{ profile_form.country }}
+          </div>
+
+        </div>
+
+        <button type="submit" class="btn-save">Save Changes</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<!-- Live image preview -->
+<script>
+const input = document.querySelector('input[type="file"]');
+const preview = document.getElementById('profilePreview');
+if(input && preview){
+    input.addEventListener('change', e => {
+        const file = e.target.files[0];
+        if(file){
+            const reader = new FileReader();
+            reader.onload = () => preview.src = reader.result;
+            reader.readAsDataURL(file);
+        }
+    });
+}
+</script>
+{% endblock %}

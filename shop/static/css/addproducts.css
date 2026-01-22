@@ -1,0 +1,133 @@
+body {
+    background: #0b0f1a;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    margin: 0;
+}
+
+/* MAIN BOX */
+.main-box {
+    max-width: 1100px;
+    margin: 30px auto 50px;
+    padding: 20px;
+}
+
+/* TOP HEADER */
+.top-header {
+    background: linear-gradient(135deg, #141e30, #243b55);
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    margin-bottom: 30px;
+}
+
+.top-header h2 {
+    margin: 0 0 10px 0;
+    font-size: 28px;
+    color: #00f2ff;
+}
+
+.top-header p {
+    margin: 0;
+    color: #aaa;
+}
+
+/* FORM AREA */
+.form-area {
+    background: #121212;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+}
+
+/* TWO COLUMN GRID */
+.form-two-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+/* FORM COLUMNS */
+.form-left, .form-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* FORM GROUP */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #00f2ff;
+}
+
+input.form-control, select, textarea {
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: #1b1b1b;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input.form-control:focus,
+textarea:focus,
+select:focus {
+    border-color: #00f2ff;
+    box-shadow: 0 0 8px rgba(0,242,255,0.4);
+}
+
+/* FILE INPUT */
+input[type="file"] {
+    padding: 6px 10px;
+}
+
+/* HELP TEXT */
+.form-text {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+}
+
+/* ERROR TEXT */
+.text-danger {
+    font-size: 12px;
+    margin-top: 4px;
+    color: #ff4d6d;
+}
+
+/* BUTTON */
+.btn-main {
+    background: linear-gradient(135deg, #09a1ff, #18baff);
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-main:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(24, 186, 255, 0.35);
+}
+
+/* FULL WIDTH INPUTS */
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .form-two-grid { grid-template-columns: 1fr; }
+}

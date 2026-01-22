@@ -1,0 +1,76 @@
+{% extends 'navbase.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-box">
+
+    <!-- TOP HEADER -->
+    <div class="top-header">
+        <h2>🛒 Add New Product</h2>
+        <p>Fill product details & publish instantly</p>
+    </div>
+
+    <!-- FORM AREA TWO COLUMNS -->
+    <div class="form-area">
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-two-grid">
+
+                <!-- LEFT COLUMN -->
+                <div class="form-left">
+                    {% for field in form %}
+                        {% if field.name in "title category price discount_price stock" %}
+                        <div class="form-group">
+                            <label class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <div class="form-text">{{ field.help_text }}</div>
+                            {% endif %}
+                            {% if field.errors %}
+                                <div class="text-danger small">{{ field.errors }}</div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <!-- RIGHT COLUMN -->
+                <div class="form-right">
+                    {% for field in form %}
+                        {% if field.name not in "title category price discount_price stock" %}
+                        <div class="form-group">
+                            <label class="form-label">{{ field.label }}</label>
+                            {% if field.widget.input_type == "file" %}
+                                <input type="file" name="{{ field.name }}" class="form-control">
+                            {% else %}
+                                {{ field }}
+                            {% endif %}
+                            {% if field.help_text %}
+                                <div class="form-text">{{ field.help_text }}</div>
+                            {% endif %}
+                            {% if field.errors %}
+                                <div class="text-danger small">{{ field.errors }}</div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+            </div>
+
+            <button class="btn btn-main w-100 mt-4">
+                🚀 Publish Product
+            </button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

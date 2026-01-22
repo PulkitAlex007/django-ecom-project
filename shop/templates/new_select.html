@@ -1,0 +1,56 @@
+{% extends 'navbase.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="page-container">
+
+<div class="product-box">
+
+    <div class="product-content">
+        <h1>{{ product_select.title }}</h1>
+        <p class="category">Category: {{ product_select.category }}</p>
+
+        <div class="price">
+            <span class="discount">₹{{ product_select.discount_price }}</span>
+            <span class="original">₹{{ product_select.price }}</span>
+        </div>
+
+        <p class="desc">{{ product_select.long_description }}</p>
+
+        <p class="stock">
+            {% if product_select.stock > 0 %}
+                <span class="in">In Stock</span>
+            {% else %}
+                <span class="out">Out of Stock</span>
+            {% endif %}
+        </p>
+
+<!-- product_detail.html -->
+<a href="{% url 'add_to_cart_and_redirect' product_select.id %}" class="cart-btn" style="text-decoration:none;">Buy Now</a>
+</form>
+
+    </div>
+
+    <div class="product-image">
+        <img src="{{ product_select.image.url }}">
+    </div>
+
+</div>
+
+<h2 class="related-heading">Related Products</h2>
+
+<div class="related-grid">
+    {% for item in related_products %}
+    <div class="related-card">
+        <a href="{% url 'select' item.id %}">
+            <img src="{{ item.image.url }}">
+        </a>
+        <h4>{{ item.title }}</h4>
+        <p>₹{{ item.discount_price }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+</div>
+{% endblock %}

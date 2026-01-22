@@ -1,0 +1,51 @@
+{% extends 'navbase.html' %}
+{% load static %}
+
+{% block content %}
+<div class="login-wrapper">
+
+  <!-- LEFT PANEL -->
+  <div class="login-left">
+    <h1>Welcome Back</h1>
+    <p>
+      Login to your premium account <br>
+      and continue your journey with us
+    </p>
+  </div>
+
+  <!-- RIGHT FORM -->
+  <div class="login-right">
+    <h2>Login</h2>
+
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="input-box">
+        <input type="text" name="username" required>
+        <label>Username</label>
+      </div>
+
+      <div class="input-box">
+        <input type="password" name="password" required>
+        <label>Password</label>
+      </div>
+
+      <button type="submit" class="btn-login">Login</button>
+
+      <p class="text">
+        Don’t have an account?
+        <a href="{% url 'signup' %}">Sign Up</a>
+      </p>
+
+      {% if messages %}
+        <div class="form-messages">
+          {% for message in messages %}
+            <p class="error-msg">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </form>
+  </div>
+
+</div>
+{% endblock %}

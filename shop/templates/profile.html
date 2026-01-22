@@ -1,0 +1,69 @@
+{% extends 'navbase.html' %}
+{% load static %}
+{% block content %}
+
+<div class="profile-wrapper">
+    <div class="profile-card">
+
+        <!-- PROFILE TOP -->
+        <div class="profile-header">
+            {% if profile.user_image %}
+                <img src="{{ profile.user_image.url }}" class="profile-img">
+            {% else %}
+                <img src="https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Picture.png" class="profile-img">
+            {% endif %}
+            <h4 class="username">{{ request.user.username }}</h4>
+            <p class="welcome-text">Welcome to your personal dashboard. Manage your profile details effortlessly.</p>
+        </div>
+
+        <!-- PROFILE INFO -->
+        <div class="profile-info">
+            <h4 class="section-title">Profile Information</h4>
+
+            <div class="info-grid">
+                <div class="info-box">
+                    <p class="label">Username</p>
+                    <p class="value">{{ request.user.username }}</p>
+                </div>
+                <div class="info-box">
+                    <p class="label">Email</p>
+                    <p class="value">{{ request.user.email }}</p>
+                </div>
+                <div class="info-box">
+                    <p class="label">Phone Number</p>
+                    <p class="value">{{ profile.phone_number }}</p>
+                </div>
+                <div class="info-box">
+                    <p class="label">Gender</p>
+                    <p class="value">{{ profile.gender }}</p>
+                </div>
+                <div class="info-box">
+                    <p class="label">Age</p>
+                    <p class="value">{{ profile.age }}</p>
+                </div>
+                <div class="info-box full-width">
+                    <p class="label">Address</p>
+                    <p class="value">{{ profile.address_line }}</p>
+                </div>
+                <div class="info-box">
+                    <p class="label">Pin Code</p>
+                    <p class="value">{{ profile.pin_code }}</p>
+                </div>
+                <div class="info-box">
+                    <p class="label">State</p>
+                    <p class="value">{{ profile.state }}</p>
+                </div>
+                <div class="info-box">
+                    <p class="label">Country</p>
+                    <p class="value">{{ profile.country }}</p>
+                </div>
+            </div>
+
+            <!-- UPDATE BUTTON -->
+            <a href="{% url 'update_profile' %}" class="btn btn-update mt-4">Update Profile</a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

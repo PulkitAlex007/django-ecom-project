@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}ASSAISAN{% endblock %}</title>
+    {% load static %}
+
+    <!-- EXISTING CSS (SAFE) -->
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/new.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/update.css' %}">
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cart_dark.css' %}">
+    <link rel="stylesheet" href="{% static 'css/addproducts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/confirm.css' %}">
+    <link rel="stylesheet" href="{% static 'css/my_orders.css' %}">
+       
+
+    <!-- NEW UI CSS -->
+    <link rel="stylesheet" href="{% static 'css/premium-base.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+    <div class="nav-container">
+
+        <!-- LEFT BRAND -->
+        <div class="brand">
+            ASSA<span>ISAN</span>
+        </div>
+
+        <!-- RIGHT MENU -->
+        <nav class="nav-menu" id="navMenu">
+            <ul>
+                <li><a href="{% url "home" %}">Home</a></li>
+
+
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'add_product' %}">Sell</a></li>
+                <li><a href="{% url 'profile' %}">Account</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'my_orders' %}">My orders</a></li>
+                {% else %}
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                {% endif %}
+
+                
+                <li class="cart">
+                    <a href="{% url 'showCart' %}">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span id="cart-count">{{ cart_count }}</span>
+                    </a>
+                </li>
+               
+            </ul>
+        </nav>
+
+        <!-- HAMBURGER -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+    </div>
+</header>
+
+<!-- ================= PAGE CONTENT ================= -->
+
+    {% block content %}{% endblock %}
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="footer-inner">
+        
+        <small>Premium Fashion • Designed for Modern Lifestyle</samll>
+
+        <div class="footer-social">
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-x-twitter"></i>
+        </div>
+
+        <small>© 2026 ASSAISAN. All Rights Reserved.</small>
+    </div>
+</footer>
+
+</div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navMenu").classList.toggle("open");
+}
+</script>
+
+</body>
+</html>

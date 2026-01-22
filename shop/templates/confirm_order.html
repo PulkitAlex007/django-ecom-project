@@ -1,0 +1,52 @@
+{% extends 'navbase.html' %}
+{% load static %}
+
+{% block content %}
+<div class="checkout-container">
+
+    <!-- LEFT PANEL: ORDER SUMMARY -->
+    <div class="checkout-left">
+        <h2>🛒 Order Summary</h2>
+        <div class="product-list">
+            {% for item in cart_items %}
+            <div class="product-row">
+                <div class="product-info">
+                    <h4>{{ item.product.title }}</h4>
+                    <span>Qty: {{ item.quantity }}</span>
+                </div>
+                <div class="product-price">
+                    ₹{{ item.subtotal }}
+                </div>
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- RIGHT PANEL: SHIPPING & TOTAL -->
+    <div class="checkout-right">
+        <h3>Shipping Info</h3>
+        <div class="user-info">
+            <p><strong>{{ request.user.get_full_name }}</strong></p>
+            <p>📱 {{ user_profile.phone_number }}</p>
+            <p>📍 {{ user_profile.address_line }}, {{ user_profile.country }}</p>
+        </div>
+
+        <div class="order-totalc">
+            <span>Total</span>
+            <strong>₹ {{ total_price }}</strong>
+        </div>
+
+        <div class="checkout-btns">
+            <a href="{% url 'cart' %}" class="btn btn-cancel">Cancel</a>
+            <form method="POST" action="{% url 'place_order' %}">
+                {% csrf_token %}
+                <input type="hidden" name="payment_method" value="COD">
+                <button type="submit" class="btn btn-confirm">Confirm Order</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

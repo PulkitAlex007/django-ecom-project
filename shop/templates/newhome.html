@@ -1,0 +1,278 @@
+{% extends 'navbase.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- ===== HOME / HERO SECTION ===== -->
+<section class="hero-home" id="home">
+    <div class="hero-center">
+        <h1>Discover Your Style</h1>
+        <p>
+            Premium fashion • Trending collections <br>
+            Designed for modern lifestyle
+        </p>
+
+        <a href="#sect1" class="shop-now-btn">
+            Shop Now
+        </a>
+    </div>
+</section>
+
+<!-- ================= mens ================= -->
+<section class="product-section" id="sect1">
+    <h2 class="section-title">Mens Products</h2>
+
+    <div class="product-grid">
+        {% for product in product %}
+        <div class="product-card">
+             
+            <div class="wishlist">
+                <i class="fa-regular fa-heart"></i>
+            </div>
+
+            <div class="product-img">
+                <a href=" {% url "select" product.id %}"><img src="{{ product.image.url }}" alt="{{ product.title }}"></a>
+                   {% if product.listed_by %}
+    <small class="listed-by">
+        Listed by &#187; {{ product.listed_by }}</small>
+    {% endif %}
+            </div>
+
+            <div class="product-info">
+                <h3>{{ product.title }}</h3>
+
+                <p class="short-desc">
+                    {{ product.short_description|truncatechars:60 }}
+                </p>
+
+                <div class="price-box">
+                    <span class="discount-price">₹{{ product.discount_price }}</span>
+                    <span class="original-price">₹{{ product.price }}</span>
+                </div>
+                <input type="hidden" id="csrf" value="{{ csrf_token }}">
+                <button onclick="addToCart(this,{{product.id}})" class="add-cart">
+                    <span class="btnText">Add to cart</span>
+                    <span class="loader" class="loader"></span>
+                </button>
+                
+
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- ================= women ================= -->
+<section class="product-section" id="sect2">
+    <h2 class="section-title">Women Products</h2>
+
+    <div class="product-grid">
+        {% for product in women %}
+        <div class="product-card">
+
+            <div class="wishlist">
+                <i class="fa-regular fa-heart"></i>
+            </div>
+
+            <div class="product-img">
+                <a href=" {% url "select" product.id %}"><img src="{{ product.image.url }}" alt="{{ product.title }}"></a>
+            </div>
+
+            <div class="product-info">
+                <h3>{{ product.title }}</h3>
+
+                <p class="short-desc">
+                    {{ product.short_description|truncatechars:60 }}
+                </p>
+
+                <div class="price-box">
+                    <span class="discount-price">₹{{ product.discount_price }}</span>
+                    <span class="original-price">₹{{ product.price }}</span>
+                </div>
+
+                <input type="hidden" id="csrf" value="{{ csrf_token }}">
+                <button onclick="addToCart(this,{{product.id}})" class="add-cart">
+                    <span class="btnText">Add to cart</span>
+                    <span class="loader" class="loader"></span>
+                </button>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<!-- ================= child ================= -->
+ <section class="product-section" id="sect3">
+    <h2 class="section-title">Child Products</h2>
+
+    <div class="product-grid">
+        {% for product in child %}
+        <div class="product-card">
+
+            <div class="wishlist">
+                <i class="fa-regular fa-heart"></i>
+            </div>
+
+            <div class="product-img">
+                <a href=" {% url "select" product.id %}"><img src="{{ product.image.url }}" alt="{{ product.title }}"></a>
+            </div>
+
+            <div class="product-info">
+                <h3>{{ product.title }}</h3>
+
+                <p class="short-desc">
+                    {{ product.short_description|truncatechars:60 }}
+                </p>
+
+                <div class="price-box">
+                    <span class="discount-price">₹{{ product.discount_price }}</span>
+                    <span class="original-price">₹{{ product.price }}</span>
+                </div>
+
+                <input type="hidden" id="csrf" value="{{ csrf_token }}">
+                <button onclick="addToCart(this,{{product.id}})" class="add-cart">
+                    <span class="btnText">Add to cart</span>
+                    <span class="loader" class="loader"></span>
+                </button>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<!-- ================= child ================= -->
+ <section class="product-section" id="sect4">
+    <h2 class="section-title">Accessories Products</h2>
+
+    <div class="product-grid">
+        {% for product in acc %}
+        <div class="product-card">
+
+            <div class="wishlist">
+                <i class="fa-regular fa-heart"></i>
+            </div>
+
+            <div class="product-img">
+                <a href=" {% url "select" product.id %}"><img src="{{ product.image.url }}" alt="{{ product.title }}"></a>
+            </div>
+
+            <div class="product-info">
+                <h3>{{ product.title }}</h3>
+
+                <p class="short-desc">
+                    {{ product.short_description|truncatechars:60 }}
+                </p>
+
+                <div class="price-box">
+                    <span class="discount-price">₹{{ product.discount_price }}</span>
+                    <span class="original-price">₹{{ product.price }}</span>
+                </div>
+
+               <input type="hidden" id="csrf" value="{{ csrf_token }}">
+                <button onclick="addToCart(this,{{product.id}})" class="add-cart">
+                    <span class="btnText">Add to cart</span>
+                    <span class="loader" class="loader"></span>
+                </button>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<script>
+    function updatecart(count){
+        document.getElementById("cart-count").innerText=count
+    }
+    function addToCart(btn,id){
+        btn.querySelector(".btnText").style.display="none";
+        btn.querySelector(".loader").style.display="inline-block";
+        fetch('/add-to-cart/',{
+            method:"POST",
+            headers:{
+                "X-CSRFToken":document.getElementById("csrf").value,
+                "Content-Type":"application/x-www-form-urlencoded",
+            },
+            body:`product_id=${id}`
+        })
+        .then(r => r.json())
+        .then(d => {
+            setTimeout(() =>{
+            btn.querySelector(".loader").style.display="none";
+            btn.querySelector(".btnText").style.display="inline";
+            },500)
+            updatecart(d.cart_count)
+        });
+    }
+function reveal() {
+    const reveals = document.querySelectorAll('.product-card');
+    const windowHeight = window.innerHeight;
+    const elementVisible = 30; // pixels before element comes into view
+
+    reveals.forEach((card, index) => {
+        const elementTop = card.getBoundingClientRect().top;
+
+        if (elementTop < windowHeight - elementVisible) {
+            // Staggered effect (small delay)
+            setTimeout(() => {
+                card.classList.add('active');
+            }, index * 10); // 100ms per card, smooth
+        }
+    });
+}
+
+// Run on scroll and page load
+window.addEventListener('scroll', reveal);
+window.addEventListener('load', reveal);
+
+document.querySelectorAll('.wishlist').forEach((btn) => {
+    btn.addEventListener('click', () => {
+
+        // Get product info
+        const card = btn.closest('.product-card');
+        const title = card.querySelector('h3').innerText;
+        const desc = card.querySelector('.short-desc').innerText;
+
+        // Remove old popup if exists
+        const oldPopup = document.querySelector('.ai-popup');
+        if(oldPopup) oldPopup.remove();
+
+        // Create popup
+        const popup = document.createElement('div');
+        popup.classList.add('ai-popup');
+        popup.innerHTML = `
+            <span class="close-btn">&times;</span>
+            <h4>${title}</h4>
+            <p class="typing"></p>
+        `;
+        document.body.appendChild(popup);
+        popup.style.display = 'block';
+
+        const typingP = popup.querySelector('.typing');
+        let index = 0;
+
+        function typeWord() {
+            if(index < desc.length){
+                typingP.innerText += desc.charAt(index);
+                index++;
+                setTimeout(typeWord, 40); // speed of typing
+            }
+        }
+        typeWord();
+
+        // Close button
+        popup.querySelector('.close-btn').addEventListener('click', () => {
+            popup.remove();
+        });
+
+        // Auto remove after 8s
+        setTimeout(() => popup.remove(), 4000);
+    });
+});
+
+
+</script>
+{% endblock %}
+</body>
+</html>
