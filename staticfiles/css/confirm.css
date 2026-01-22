@@ -1,0 +1,141 @@
+.checkout-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    max-width: 1100px;
+    margin: 120px auto 50px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
+
+/* LEFT PANEL */
+.checkout-left {
+    background: linear-gradient(135deg, #141e30, #243b55);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+}
+
+.checkout-left h2 {
+    color: #00f2ff;
+    margin-bottom: 20px;
+}
+
+.product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.product-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-info h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.product-info span {
+    font-size: 13px;
+    color: #aaa;
+}
+
+.product-price {
+    font-weight: 600;
+    color: #ffd166;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 10px 0;
+}
+
+/* RIGHT PANEL */
+.checkout-right {
+    background: #121212;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.checkout-right h3 {
+    color: #00f2ff;
+    margin-bottom: 10px;
+}
+
+.user-info p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.order-totalc {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background: #1b1b1b;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+
+    
+}
+
+.order-total strong {
+    color: #00f2ff;
+}
+
+/* BUTTONS */
+.checkout-btns {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    color: #fff;
+}
+
+.btn-cancel {
+    background: #ff4d6d;
+}
+
+.btn-cancel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255,77,109,0.35);
+}
+
+.btn-confirm {
+    background: linear-gradient(135deg,#09a1ff,#18baff);
+    border: none;
+}
+
+.btn-confirm:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(24,186,255,0.35);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .checkout-container {
+        grid-template-columns: 1fr;
+    }
+}
+

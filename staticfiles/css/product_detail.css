@@ -1,0 +1,154 @@
+   
+   body{margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:#0b0e1a;
+    color:#fff;
+}
+
+/* NAV */
+.detail-nav{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    position: sticky;
+    top:0;
+    left:0;
+    right:0;
+    padding:14px 24px;
+    background:#12131f;
+}
+.back-btn{
+    color:#fff;
+    font-size:18px;
+}
+.logo{
+    font-size:20px;
+    font-weight:700;
+}
+.logo span{color:#1cb0f6;}
+
+/* PAGE */
+.page-container{
+    max-width:1000px;
+    margin:30px auto;
+    padding:0 16px;
+}
+
+/* PRODUCT */
+.product-box{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:30px;
+    background:#1a1b2b;
+    border-radius:16px;
+    padding:28px;
+}
+
+/* LEFT */
+.product-content h1{
+    font-size:24px;
+    margin:0;
+}
+.category{
+    color:#aaa;
+    font-size:13px;
+    margin-top:4px;
+}
+
+.price{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:14px 0;
+}
+.price .discount{
+    font-size:24px;
+    font-weight:700;
+    color:#1cb0f6;
+}
+.price .original{
+    font-size:15px;
+    color:#777;
+    text-decoration:line-through;
+}
+
+.desc{
+    font-size:14px;
+    color:#ccc;
+    line-height:1.5;
+}
+
+.stock{
+    margin-top:12px;
+    font-size:14px;
+}
+.in{color:#4caf50;}
+.out{color:#f44336;}
+
+.cart-btn{
+    margin-top:22px;
+    padding:12px 26px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,#0af,#1cb0f6);
+    color:#fff;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition: transform .3s ease;
+}
+.cart-btn:hover{
+    transform: translateY(-4px);
+    box-shadow:2px 2px 22px rgb(23, 95, 154);
+}
+
+/* IMAGE */
+.product-image{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.product-image img{
+    width:100%;
+    max-height:300px;
+    object-fit:contain;
+    border-radius:14px;
+}
+
+/* RELATED */
+.related-heading{
+    margin:40px 0 14px;
+    font-size:20px;
+}
+.related-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+}
+.related-card{
+    background:#1c1d2c;
+    border-radius:14px;
+    padding:12px;
+    text-align:center;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+.related-card:hover{
+        transform: translateY(-6px);
+   
+
+}
+.related-card img{
+    width:100%;
+    height:160px;
+    object-fit:cover;
+    border-radius:10px;
+}
+.related-card h4{
+    font-size:14px;
+    margin:8px 0 4px;
+}
+.related-card p{
+    color:#1cb0f6;
+    font-size:14px;
+    font-weight:600;
+}
