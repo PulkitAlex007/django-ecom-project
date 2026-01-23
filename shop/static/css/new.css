@@ -445,3 +445,140 @@ html{
     font-size: 13px;
   }
 }
+
+
+/* ========================= */
+/* 📱 MOBILE POLISH FIX ONLY */
+/* ========================= */
+@media (max-width: 600px) {
+
+  body {
+    font-size: 14px;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero-home {
+    padding: 70px 16px;
+    text-align: center;
+  }
+
+  .hero-center h1 {
+    font-size: 28px;
+    line-height: 1.25;
+  }
+
+  .hero-center p {
+    font-size: 14px;
+    margin-bottom: 22px;
+  }
+
+  .shop-now-btn {
+    padding: 12px 28px;
+    font-size: 14px;
+  }
+
+  /* SECTION */
+  .product-section {
+    padding: 35px 12px;
+  }
+
+  .section-title {
+    font-size: 22px;
+    margin-bottom: 25px;
+  }
+
+  /* GRID */
+  .product-grid {
+    width: 100%;
+    padding: 8px;
+    gap: 10px;
+  }
+
+  /* CARD */
+  .product-card {
+    padding: 12px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.6);
+  }
+
+  /* IMAGE */
+  .product-img {
+    height: 170px;
+  }
+
+  /* TEXT */
+  .product-info h3 {
+    font-size: 15px;
+  }
+
+  .short-desc {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  /* PRICE */
+  .discount-price {
+    font-size: 16px;
+  }
+
+  .original-price {
+    font-size: 12px;
+  }
+
+  /* BUTTON */
+  .add-cart {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  /* WISHLIST */
+  .wishlist {
+    width: 30px;
+    height: 30px;
+    top: 10px;
+    right: 10px;
+  }
+
+  /* LISTED BY */
+  .listed-by {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+
+  /* AI POPUP */
+  .ai-popup {
+    width: 92%;
+    right: 4%;
+    bottom: 15px;
+    padding: 14px 16px;
+  }
+
+  .ai-popup h4 {
+    font-size: 15px;
+  }
+
+  .ai-popup p {
+    font-size: 13px;
+  }
+}
+
+/* EXTRA SMALL SCREENS */
+@media (max-width: 420px) {
+
+  .hero-center h1 {
+    font-size: 24px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-img {
+    height: 155px;
+  }
+
+  .add-cart {
+    font-size: 13px;
+  }
+}

@@ -159,3 +159,51 @@
         max-width: 100%;
     }
 }
+
+/* ========================= */
+/* 📱 SIGNUP PAGE MOBILE FIX */
+/* ========================= */
+@media (max-width: 900px) {
+
+  .signup-wrapper {
+    padding: 30px 12px;
+    gap: 25px;
+  }
+
+  .signup-form-box {
+    padding: 35px 20px;
+    border-radius: 16px;
+  }
+
+  .signup-form-box h2 {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+
+  .input-box input {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .input-box label {
+    font-size: 12px;
+  }
+
+  .btn-signup {
+    font-size: 15px;
+    padding: 10px 0;
+  }
+
+  .signup-welcome-box {
+    padding: 35px 20px;
+    border-radius: 16px;
+  }
+
+  .signup-welcome-box h1 {
+    font-size: 28px;
+  }
+
+  .signup-welcome-box p {
+    font-size: 14px;
+  }
+}

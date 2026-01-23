@@ -129,3 +129,68 @@
         padding: 20px 15px;
     }
 }
+
+/* ========================= */
+/* 📱 PROFILE MOBILE FIX */
+/* ========================= */
+@media (max-width: 576px) {
+
+  .profile-wrapper {
+    padding: 25px 12px;
+  }
+
+  .profile-card {
+    border-radius: 14px;
+    padding: 0;
+  }
+
+  .profile-header {
+    padding: 25px 12px;
+  }
+
+  .profile-img {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 10px;
+  }
+
+  .username {
+    font-size: 18px;
+  }
+
+  .welcome-text {
+    font-size: 13px;
+    margin: 8px auto 0;
+    line-height: 1.4;
+    max-width: 100%;
+    padding: 0 5px;
+  }
+
+  .profile-info {
+    padding: 18px 12px;
+  }
+
+  .section-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+
+  .info-box {
+    padding: 12px 14px;
+  }
+
+  .label {
+    font-size: 11px;
+  }
+
+  .value {
+    font-size: 13px;
+  }
+
+  .btn-update {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 14px;
+    text-align: center;
+  }
+}

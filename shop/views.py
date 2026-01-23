@@ -1,4 +1,3 @@
-import json
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import JsonResponse
 from.models import Product
@@ -6,21 +5,13 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import ProductForm
 from django.contrib.auth import authenticate, login ,logout
-from django.shortcuts import redirect, render
 from .models import Order, OrderItem
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages 
-
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from .forms import UserForm, UserProfileForm
 from .forms import ProfileForm
-
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
 from .models import UserProfile
-from .forms import ProfileForm
 
-@login_required
+@login_required(login_url="/login/")
 def profile_view(request):
     # THIS LINE FIXES YOUR ERROR
     profile, created = UserProfile.objects.get_or_create(user=request.user)
@@ -40,13 +31,6 @@ def profile_view(request):
 
 
 
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from .forms import UserForm, UserProfileForm
-
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from .models import Order
 @login_required
 def my_orders(request):
     # Current user ke orders fetch karo
@@ -157,6 +141,7 @@ def add_to_cart_and_redirect(request, product_id):
 
     # redirect to existing cart page
     return redirect('showCart')
+
 def cart(request):
     cart = request.session.get('cart', {})
     products = Product.objects.filter(id__in=cart.keys())
@@ -343,48 +328,50 @@ def showCart(request):
 
 
 from .models import Product
-
+@login_required(login_url='/login/')
 def place_order(request):
-    if request.method != "POST":
-        return redirect("cart")
-    cart = request.session.get("cart", {})  # {product_id: quantity}
+    if User.is_authenticated:
+        if request.method != "POST":
+            return redirect("cart")
+        cart = request.session.get("cart", {})  # {product_id: quantity}
 
-    if not cart:
-        return redirect("cart")
+        if not cart:
+            return redirect("cart")
 
-    total = 0
+        total = 0
 
-    order = Order.objects.create(
-        user=request.user,
-        total_price=0,  # temporary, update later
-        status="Placed"
-    )
-
-    for product_id, quantity in cart.items():
-        product = Product.objects.get(id=product_id)
-        subtotal = product.price * quantity
-        total += subtotal
-
-        OrderItem.objects.create(
-            order=order,
-            product=product,
-            quantity=quantity,
-            price=product.price
+        order = Order.objects.create(
+            user=request.user,
+            total_price=0,  # temporary, update later
+            status="Placed"
         )
 
-    # Update total after adding all items
-    order.total_price = total
-    order.save()
+        for product_id, quantity in cart.items():
+            product = Product.objects.get(id=product_id)
+            subtotal = product.price * quantity
+            total += subtotal
 
-    # Clear session cart
-    request.session["cart"] = {}
+            OrderItem.objects.create(
+                order=order,
+                product=product,
+                quantity=quantity,
+                price=product.price
+            )
 
-    return redirect("order_success")
+        # Update total after adding all items
+        order.total_price = total
+        order.save()
 
+        # Clear session cart
+        request.session["cart"] = {}
 
+        return redirect("order_success")
+    else:
+        return redirect("login")
+
+@login_required(login_url="/login/")
 def confirm_order(request):
     user_profile, created = UserProfile.objects.get_or_create(user=request.user)
-
     cart = request.session.get("cart", {})
     if not cart:
         messages.error(request, "Your cart is empty!")

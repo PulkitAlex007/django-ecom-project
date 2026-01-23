@@ -131,3 +131,53 @@ input[type="file"] {
 @media(max-width:900px){
     .form-two-grid { grid-template-columns: 1fr; }
 }
+/* MOBILE RESPONSIVE FIXES */
+@media (max-width: 600px) {
+
+    body {
+        font-size: 14px;
+    }
+
+    .main-box {
+        margin: 15px 10px 30px;
+        padding: 10px;
+    }
+
+    .top-header {
+        padding: 18px;
+    }
+
+    .top-header h2 {
+        font-size: 22px;
+    }
+
+    .top-header p {
+        font-size: 13px;
+    }
+
+    .form-area {
+        padding: 18px;
+    }
+
+    .form-two-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .form-left,
+    .form-right {
+        gap: 16px;
+    }
+
+    input.form-control,
+    select,
+    textarea {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .btn-main {
+        padding: 12px;
+        font-size: 15px;
+    }
+}

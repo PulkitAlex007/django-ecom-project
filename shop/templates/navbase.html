@@ -17,10 +17,7 @@
     <link rel="stylesheet" href="{% static 'css/addproducts.css' %}">
     <link rel="stylesheet" href="{% static 'css/confirm.css' %}">
     <link rel="stylesheet" href="{% static 'css/my_orders.css' %}">
-       
 
-    <!-- NEW UI CSS -->
-    <link rel="stylesheet" href="{% static 'css/premium-base.css' %}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -32,18 +29,13 @@
 <!-- ================= NAVBAR ================= -->
 <header class="navbar">
     <div class="nav-container">
-
         <!-- LEFT BRAND -->
-        <div class="brand">
-            ASSA<span>ISAN</span>
-        </div>
+        <div class="brand">ASSA<span>ISAN</span></div>
 
         <!-- RIGHT MENU -->
         <nav class="nav-menu" id="navMenu">
             <ul>
-                <li><a href="{% url "home" %}">Home</a></li>
-
-
+                <li><a href="{% url 'home' %}">Home</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'add_product' %}">Sell</a></li>
                 <li><a href="{% url 'profile' %}">Account</a></li>
@@ -52,25 +44,22 @@
                 {% else %}
                 <li><a href="{% url 'signup' %}">Sign Up</a></li>
                 {% endif %}
-
-                
                 <li class="cart">
                     <a href="{% url 'showCart' %}">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <span id="cart-count">{{ cart_count }}</span>
                     </a>
                 </li>
-               
             </ul>
         </nav>
 
         <!-- HAMBURGER -->
-        <div class="hamburger" onclick="toggleMenu()">
+        <div class="hamburger" id="hamburger">
             <i class="fa-solid fa-bars"></i>
         </div>
-
     </div>
 </header>
+
 
 <!-- ================= PAGE CONTENT ================= -->
 
@@ -94,12 +83,21 @@
 </footer>
 
 </div>
-
 <script>
-function toggleMenu(){
-    document.getElementById("navMenu").classList.toggle("open");
-}
+    const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
+
+// Ensure click works even if <i> is clicked
+hamburger.addEventListener('click', (e) => {
+    navMenu.classList.toggle('open');
+});
+hamburger.addEventListener('click', (e) => {
+    e.stopPropagation(); // prevent any accidental event bubbling
+    navMenu.classList.toggle('open');
+});
+
 </script>
+
 
 </body>
 </html>

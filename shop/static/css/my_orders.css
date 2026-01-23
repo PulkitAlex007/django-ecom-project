@@ -163,3 +163,92 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0,200,255,0.4);
 }
+
+
+/* MOBILE RESPONSIVE FIXES */
+@media (max-width: 600px) {
+
+    body {
+        font-size: 14px;
+    }
+
+    .container {
+        max-width: 100%;
+        min-width: 100%;
+        margin: 20px 10px;
+        gap: 20px;
+        padding-bottom: 30px;
+    }
+
+    .welcome-msg {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .order-card {
+        padding: 18px;
+        border-radius: 12px;
+    }
+
+    .order-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .order-header h3 {
+        font-size: 16px;
+    }
+
+    .status-badge {
+        font-size: 12px;
+        padding: 5px 12px;
+    }
+
+    .item-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .item-img {
+        width: 60px;
+        height: 60px;
+        margin-right: 0;
+    }
+
+    .item-info h4 {
+        font-size: 14px;
+    }
+
+    .item-info p,
+    .item-info .short-desc {
+        font-size: 12px;
+    }
+
+    .item-price {
+        width: 100%;
+        min-width: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: 13px;
+    }
+
+    .order-totalh {
+        width: 100%;
+        font-size: 15px;
+        text-align: right;
+        margin-top: 12px;
+    }
+
+    .empty-msg {
+        font-size: 16px;
+        margin-top: 40px;
+    }
+
+    .shop-btn {
+        padding: 10px 22px;
+        font-size: 14px;
+        border-radius: 12px;
+    }
+}
